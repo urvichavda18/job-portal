@@ -3,7 +3,11 @@ import React from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
+import { LogOut, User2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
 export default function Navbar() {
+    const user = false;
     return (
         <div className='bg-white'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
@@ -16,27 +20,46 @@ export default function Navbar() {
                         <li>Jobs</li>
                         <li>Browse</li>
                     </ul>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Avatar className='cursor-pointer'>
-                                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                            </Avatar>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-80">
-                            <div className='flex gap-4 space-y-2'>
-                                <Avatar className='cursor-pointer'>
-                                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                                </Avatar>
-                                <div>
-                                    <h4 className='font-medium'>URVI CHAVDA</h4>
-                                    <p className='text-sm text-muted-foreground'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam facilis harum debitis hic quaerat illum, reiciendis odit? At laborum ducimus quibusdam possimus tempore doloremque, explicabo voluptates voluptate! Accusantium, vitae. Omnis?</p>
-                                </div>
+                    {
+                        !user ? (
+                            <div className=' flex items-center gap-2'>
+                                <Link to="/login"><Button variant="outline">Login</Button></Link>
+                                <Link to="/signup"><Button className="bg-[#6A69C2] hover:bg-[#3e3d8f]">Signup</Button></Link>
+                                
                             </div>
-                            <div>
-                                <Button variant="link">View Profile</Button>
-                            </div>
-                        </PopoverContent>
-                    </Popover>
+                        ) : (
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Avatar className='cursor-pointer'>
+                                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                                    </Avatar>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-80">
+                                    <div>
+                                        <div className='flex gap-2 space-y-2'>
+                                            <Avatar className='cursor-pointer'>
+                                                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                                            </Avatar>
+                                            <div>
+                                                <h4 className='font-medium'>URVI CHAVDA</h4>
+                                                <p className='text-sm text-muted-foreground'>Lorem ipsum dolor sit amet.</p>
+                                            </div>
+                                        </div>
+                                        <div className='flex flex-col my-2 text-gray-600'>
+                                            <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                                                <User2 />
+                                                <Button variant="link">View Profile</Button>
+                                            </div>
+                                            <div className='flex w-fit items-center gap-2 cursor-pointer'>
+                                                <LogOut />
+                                                <Button variant="link">Logout</Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+                        )
+                    }
                 </div>
             </div>
         </div>
