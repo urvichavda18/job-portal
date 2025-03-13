@@ -21,7 +21,6 @@ function CategoryCarousel() {
                             </CarouselItem>
                         ))
                     }
-
                 </CarouselContent>
                 <CarouselPrevious />
                 <CarouselNext />
