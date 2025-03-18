@@ -10,7 +10,7 @@ import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
 import store from '../redux/store'
 
-const Skills = ['Html', 'Css', 'Javascript', 'Reactjs']
+// const Skills = ['Html', 'Css', 'Javascript', 'Reactjs']
 const isResume = true;
 function Profile() {
     const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ function Profile() {
                         </Avatar>
                         <div>
                             <h1 className='font-medium text-xl'>{user?.fullname}</h1>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias veritatis exercitationem aperiam! </p>
+                            <p>{user?.profile?.bio}</p>
                         </div>
                     </div>
                     <Button onClick={() => setOpen(true)} className='text-right' variant='outline'> <Pen /> </Button>
@@ -35,18 +35,18 @@ function Profile() {
                 <div className='my-5'>
                     <div className='flex items-center gap-3 my-2'>
                         <Mail />
-                        <span>example@gmail.com</span>
+                        <span>{user?.email}</span>
                     </div>
                     <div className='flex items-center gap-3 my-2'>
                         <Contact />
-                        <span>9898989898</span>
+                        <span>{user?.phoneNumber}</span>
                     </div>
                 </div>
                 <div className='my-5'>
                     <h1>Skills</h1>
                     <div className='flex items-center gap-1'>
                         {
-                            Skills.length != 0 ? Skills.map((item, index) => <Badge key={index}>{item}</Badge>) : <span>NA</span>
+                            user?.profile?.skills.length != 0 ? user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>) : <span>NA</span>
                         }
                     </div>
                 </div>
