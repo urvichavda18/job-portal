@@ -8,11 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import store from '../redux/store';
 import axios from 'axios';
 import { USER_API_END_POINT } from '../utils/constant';
-import { setUser } from '../redux/authSlice';
+import { setLoading, setUser } from '../redux/authSlice';
 import { toast } from 'sonner';
 
 function UpdateProfileDialog({ open, setOpen }) {
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { user } = useSelector(store => store.auth);
 
   const [input, setInput] = useState({
@@ -47,6 +47,7 @@ function UpdateProfileDialog({ open, setOpen }) {
       formData.append("file", input.file);
     }
     try {
+      setLoading(true)
       const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
         headers: {
           'Content-Type': 'multipart/from-data'
@@ -60,6 +61,8 @@ function UpdateProfileDialog({ open, setOpen }) {
     } catch (error) {
       console.log(error)
       toast.error(error.response.data.message)
+    } finally {
+      setLoading(false)
     }
     setOpen(false)
     console.log(input);

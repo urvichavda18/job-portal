@@ -3,10 +3,12 @@ import Navbar from './shared/Navbar'
 import HeroSection from './HeroSection'
 import CategoryCarousel from './CategoryCarousel'
 import LatestJobs from './LatestJobs'
-import Footer from './Footer'
+import Footer from './shared/Footer'
 import Browse from './Browse'
+import useGetAllJobs from '../hooks/userGetAllJobs'
 // import LatestJobCards from './LatestJobCards'
 function Home() {
+  useGetAllJobs();
   return (
     <div>
       <Navbar />
