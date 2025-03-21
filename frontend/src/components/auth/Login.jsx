@@ -26,9 +26,6 @@ function Login() {
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
-  const changeFileHandler = (e) => {
-    setInput({ ...input, file: e.target.files?.[0] });
-  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -48,7 +45,7 @@ function Login() {
       }
     } catch (error) {
       console.log(error)
-      // toast.error(error.response.data.message)
+      toast.error(error.response.data.message)
     } finally {
       dispatch(setLoading(false));
     }
@@ -96,8 +93,8 @@ function Login() {
                 <Input
                   type='radio'
                   name='role'
-                  value='Recruiter'
-                  checked={input.role == 'Recruiter'}
+                  value='recruiter'
+                  checked={input.role == 'recruiter'}
                   onChange={changeEventHandler}
                   className='cursor-pointer'
                 />
