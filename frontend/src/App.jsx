@@ -9,6 +9,9 @@ import Browse from './components/Browse';
 import Profile from './components/Profile';
 import JobDescription from './components/JobDescription';
 import Companies from './components/admin/Companies';
+import CompanyCreate from './components/admin/CompanyCreate';
+import CompanySetup from './components/admin/CompanySetup';
+import AdminJobs from './components/admin/AdminJobs';
 
 const appRouter = createBrowserRouter([
   {
@@ -28,22 +31,35 @@ const appRouter = createBrowserRouter([
     element: <Jobs />
   },
   {
-    path:'/description/:id',
-    element:<JobDescription />
+    path: '/description/:id',
+    element: <JobDescription />
   },
   {
-    path:'/browse',
-    element:<Browse/>
+    path: '/browse',
+    element: <Browse />
   },
   {
-    path:'profile',
-    element:<Profile/>
+    path: '/profile',
+    element: <Profile />
   },
   //admin 
   {
-    path:'/admin/companies',
-    element:<Companies/>
-  }
+    path: '/admin/companies',
+    element: <Companies />
+  },
+  {
+    path: '/admin/companies/create',
+    element: <CompanyCreate />
+  },
+  {
+    path: '/admin/companies/:id',
+    element: <CompanySetup />
+  },
+  {
+    path: '/admin/jobs',
+    element: <AdminJobs />
+  },
+
 ])
 export default function App() {
   return (
