@@ -6,17 +6,30 @@ export const postjob = async (req, res) => {
     try {
         const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
         const userId = req.id;
+
+        // Check if all required fields are provided
         if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
             return res.status(400).json({
-                message: "something is missing",
+                message: "Something is missing.",
                 success: false
-            })
+            });
         }
+
+        // Validate salary (ensure it's a valid number)
+        const salaryNumber = Number(salary);
+        if (isNaN(salaryNumber) || salaryNumber <= 0) {
+            return res.status(400).json({
+                message: "Invalid salary value.",
+                success: false
+            });
+        }
+
+        // Create the new job record
         const job = await Job.create({
             title,
             description,
             requirements: requirements.split(","),
-            salary: Number(salary),
+            salary: salaryNumber, // Use the valid number
             location,
             jobType,
             experienceLevel: experience,
@@ -24,15 +37,21 @@ export const postjob = async (req, res) => {
             company: companyId,
             created_by: userId
         });
+
         return res.status(201).json({
-            message: "New job created succesfuly.",
+            message: "New job created successfully.",
             job,
             success: true
-        })
+        });
     } catch (error) {
-        console.log(error)
+        console.error(error);
+        return res.status(500).json({
+            message: "Something went wrong while creating the job.",
+            success: false
+        });
     }
-}
+};
+
 
 //get job
 //student ke liye
@@ -91,7 +110,10 @@ export const getJobById = async (req, res) => {
 export const getAdminJobs = async (req, res) => {
     try {
         const adminId = req.id;
-        const jobs = await Job.find({ created_by: adminId })
+        const jobs = await Job.find({ created_by: adminId }).populate({
+            path:'company',
+            createdAt:-1
+        })
         if (!jobs) {
             return res.status(400).json({
                 message: "jobs not found",
