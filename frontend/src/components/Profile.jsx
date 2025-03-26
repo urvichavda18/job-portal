@@ -9,10 +9,12 @@ import AppliedJobTable from './AppliedJobTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
 import store from '../redux/store'
+import useGetAppliedJobs from '../hooks/useGetAppliedJobs'
 
 // const Skills = ['Html', 'Css', 'Javascript', 'Reactjs']
 const isResume = true;
 function Profile() {
+    useGetAppliedJobs();
     const [open, setOpen] = useState(false);
     const { user } = useSelector(store => store.auth);
     return (
@@ -23,7 +25,7 @@ function Profile() {
 
                     <div className='flex items-center gap-4'>
                         <Avatar className='h-24 w-24'>
-                            <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxnNwtjy7XtgFppO1YTK7xs041HzLoSe5C6Nsm0-zw8FOxDhAMT2IPz58_hloY3w4oIRY&usqp=CAU" />
+                            <AvatarImage src={user?.profile?.profilePhoto} />
                         </Avatar>
                         <div>
                             <h1 className='font-medium text-xl'>{user?.fullname}</h1>
