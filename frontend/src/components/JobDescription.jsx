@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from '../utils/constant'
 import { setSingleJob } from '../redux/jobSlice'
@@ -48,12 +48,12 @@ function JobDescription() {
     }
     fetchSingleJobs();
   }, [jobId, dispatch, user?._id])
-
+  const navigate = useNavigate();
   return (
     <div className='max-w-7xl mx-auto my-10'>
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='font-bold text-xl'>{singleJob?.title}</h1>
+          <h1 className='font-bold text-xl'><button onClick={() => navigate('/jobs')} className='pr-5'> 🡠 </button> {singleJob?.title}</h1>
           <div className='flex items-center gap-2 mt-4'>
             <Badge className={'text-blue-700 font-bold'} variant="ghost">{singleJob?.position} Positions</Badge>
             <Badge className={'text-[#F83002] font-bold'} variant="ghost">{singleJob?.jobType}</Badge>
@@ -82,3 +82,8 @@ function JobDescription() {
 }
 
 export default JobDescription
+
+
+
+
+
