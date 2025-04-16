@@ -45,7 +45,7 @@ function JobDescription() {
         }
       } catch (error) {
         console.log(error)
-      }
+      }  
     }
     fetchSingleJobs();
   }, [jobId, dispatch, user?._id])
