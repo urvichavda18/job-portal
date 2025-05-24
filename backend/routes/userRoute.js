@@ -9,4 +9,4 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 router.route("/profile/update").post(isAuthenticated,singleUpload,updateProfile);
 
-export default router
+export default router;
